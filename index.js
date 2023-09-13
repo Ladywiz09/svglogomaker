@@ -1,20 +1,22 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {Circle, Square, Triangle} = require('./lib/shapes');
 
+const {Triangle, Square, Circle} = require('./lib/shapes');
+
+//An array of questions for user input
 const questions = [
     {
         type: 'list',
         name: 'shape',
         message: 'What shape would you like to draw?',
-        choices: ['Circle', 'Square', 'Triangle']
+        choices: ['Triangle', 'Square', 'Circle'],
     },
 
     {
         type: 'input',
         name: 'shapeColor',  
         message: 'What color would you like to color your logo?',
-        default: 'red'
+        
     },
     {
         type: 'input',
@@ -25,7 +27,7 @@ const questions = [
         type: 'input',
         name: 'textColor',
         message: 'What color would you like your text to be?',
-        default: 'white'
+        
     },
 ]
 
@@ -35,7 +37,7 @@ class SVG {
         this.shapeEl = '';
     }
     render() {
-        return `<svg version="1.1" xmlns="https://www.w3.org/TR/SVG2/" width="300" height="250">${this.shapeEl}${this.textEl}</svg>`
+        return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="250">${this.shapeEl}${this.textEl}</svg>`
     }
     createText(text, color) {
         if (text.length > 3 && text.length < 1) {
@@ -55,12 +57,12 @@ class SVG {
         const logoText = data.text;
         //generates logo shape
         let newShape = '';
-        if (data.shape === 'Circle') {
-            newShape = new Circle();
+        if (data.shape === 'Triangle') {
+            newShape = new Triangle();
         } else if (data.shape === 'Square') {
             newShape = new Square();
-        } else if (data.shape === 'Triangle') {
-            newShape = new Triangle();
+        } else if (data.shape === 'Circle') {
+            newShape = new Circle();
         } else {
             console.log('Please select a shape');
         }
